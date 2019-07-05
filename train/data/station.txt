@@ -1,0 +1,41 @@
+Chennai Beach:MSB:Mannadi:600001:N,W,S,M
+Chennai Fort:MSF:George Town:600009:S,M
+Chennai Park:MPK:Park Town:600003:S
+Chennai Egmore:MS:Egmore:600008:S
+Chetpet:MSC:Chetpet:600031:S
+Nungambakkam:NBK:Nungambakkam:600034:S
+Kodambakkam:MKK:Kodambakkam:600024:S
+Mambalam:MBM:West Mambalam:600033:S
+Saidapet:SP:Saidapet:600015:S
+Guindy:GDY:Guindy:600032:S
+St.Thomas Mount:STM:Adambakkam:600016:S
+Palavanthangal:PZA:Palavanthangal:600114:S
+Minambakkam:MN:Meenambakkam:600027:S
+Tirusulam:TLM:Meenambakkam:600027:S
+Pallavaram:PV:Pallavaram:600043:S
+Chromepet:CMP:Chromepet:600044:S
+Tambaram Sanatorium:TBMS:Tambaram:600047:S
+Tambaram:TBM:Tambaram:600045:S
+Perungalathur:PRGL:Perungalathur:600063:S
+Vandalur:VDR:Vandalur:600048:S
+Urapakkam:UPM:Urapakkam:603211:S
+Guduvancheri:GI:Guduvancheri:603202:S
+Potheri:POTI:Madambakkam(Kattangulathur):603203:S
+Kattangulathur:CTM:Kattangulathur:603203:S
+Maraimalai Nagar-Kamarajar:MMNK:Maraimalai Nagar:603204:S
+Singaperumal Koil:SKL:Singaperumal Koil:603204:S
+Paranur:PWU:Paranur:603101:S
+Chengalpattu Jn.:CGL:Chengalpattu:603001:S
+Ottivakkam:OV:Ottivakkam:603209:S
+Karunguzhi:KGZ:Karunguzhi:603303:S
+Madurantakam:MMK:Madurantakam:603306:S
+Melmaruvathur:MLMR:Melmaruvathur:603302:S
+Reddypalayam:RDY:Reddypalayam:603101:SW
+Villiyambakkam:VB:Villiyambakkam:603101:SW
+Palur:PALR:Palur:603101:SW
+Palayasivaram:PYV:Palayasivaram:6:SW
+Walajabad:WJ:Walajabad:6:SW
+Nathapettai:NTT:Nathapettai:6:SW
+Kanchipuram Old:CJE:Kanchipuram Town:6:SW
+Kanchipuram:CJ:Kanchipuram:6:SW
+Thirumalpur:TMLP:Thirumalpur:60:SW

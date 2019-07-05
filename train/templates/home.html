@@ -1,0 +1,149 @@
+{% extends "base.html" %} {% load staticfiles %}{% block head %}
+{% endblock head %}{% block body %} {% load staticfiles %}
+<main class="homemain">
+    <div class="parallax-container">
+        <div class="parallax"><img src="{% static 'images/parallax1.jpg' %}"></div>
+    </div>
+    <div class="section white hoverable content-container valign-wrapper" id="intro">
+        <div class="row container">
+            <h3 class="header center teal-text">What is Chennai Loco?</h3>
+            <p class="flow-text">This web app ( or as we call it the Chennai Loco ) is a project for our CS course "Database Management Systems" under the guidance of Prof. Dr. B. Saleena ma'am. It has a huge database of the schedules of Chennai Electric trains providing users a simple and an easy interface for searching the schedules of the Trains and also letting them viewing the details of each Train and Station ( with user ratings and reviews ). </p>
+        </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="{% static 'images/parallax2.jpg' %}"></div>
+    </div>
+    <div class="section white hoverable content-container valign-wrapper" id="fromtosearch">
+        <div class="row container center">
+            <form method="POST" action="{% url 'placessearch' %}">
+            {% csrf_token %}
+            <h4 class="header teal-text">Search by from and to station.</h4>
+            <p class="flow-text">Enter the from and to station to view trains in between them</p>
+            <div class="row input-field col s12 m6">
+          <input placeholder="From Station" id="from-input" name="fromstation" type="text" class="validate">
+
+        </div>
+        <div class="row input-field col s12 m6">
+          <input placeholder="To Station" id="to-input" name="tostation" type="text" class="validate">
+
+        </div>
+         <button class="btn waves-effect waves-light" type="submit" name="action">Search
+            <i class="material-icons right">search</i>
+        </button>
+        </form>  
+        </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="{% static 'images/parallax3.jpg' %}"></div>
+    </div>
+    <div class="section white hoverable content-container valign-wrapper" id="trainsearch">
+        <div class="row container center">
+            <form method="POST" action="{% url 'trainsearch' %}">
+            {% csrf_token %}
+            <h4 class="header teal-text">Search for Train.</h4>
+            <p class="flow-text">Get every detail of a train inluding it's route and timing on searching by either its name or it's number. </p>
+            <div class="row input-field col s12 m6 push-m3">
+                <input id="train-input" placeholder="Enter train number" name="trainnumber" type="text" class="validate">
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Search
+                <i class="material-icons right">search</i>
+            </button>
+        </form>  
+        </div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="{% static 'images/parallax3.jpg' %}"></div>
+    </div>
+    <div class="section white hoverable content-container valign-wrapper" id="stationsearch">
+        <div class="row container center">
+            <form method="POST" action="{% url 'stationsearch' %}">
+            {% csrf_token %}
+            <h4 class="header teal-text">Search for a Station.</h4>
+            <p class="flow-text">Get every detail of the station inluding everything about the trains passing through and detailed reviews/ratings about the specific station.</p>
+            <div class="row input-field col s12 m6 push-m3">
+                <input id="station-input" name="stationname" placeholder="Enter station name" type="text" class="validate">
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Search
+                <i class="material-icons right">search</i>
+            </button>
+        </form>  
+        </div>
+    </div>
+    <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red" id="menu">
+      <i class="large material-icons">search</i>
+    </a>
+    <ul>
+      <li><a class="scroll-links btn-floating red" href="#intro">I</a></li>
+      <li><a class="scroll-links btn-floating yellow darken-1" href="#fromtosearch"><i class="material-icons right">compare_arrows</i></a></li>
+      <li><a class="scroll-links btn-floating green" href="#trainsearch">T</a></li>
+      <li><a class="scroll-links btn-floating blue" href="#stationsearch">S</a></li>
+    </ul>
+  </div>
+
+  <!-- Feature Discovery -->
+  <div class="tap-target" data-activates="menu">
+    <div class="tap-target-content">
+      <h5>Welcome to ChennaiLoco</h5>
+      <p class="flow-text">Use this menu to navigate to various search options</p>
+    </div>
+  </div>
+          
+</main>
+{% endblock body %} {% block js %}
+<script src="{% static 'js/easy-autocomplete.min.js' %}"></script>
+<script>
+// Search Buttons
+$(".searchbtns").on("click", function() {
+    var selector = "." + $(this).data("class");
+    if ($(this).data("isOpen") == "1") {
+        $(".search-hide").hide();
+        $(this).data("isOpen", "0");
+    } else {
+        $(selector).fadeIn();
+        $(this).data("isOpen", "1");
+    }
+});
+
+// Ajax autocomplete
+var stationOptions = {
+    url: "{% url 'stationapi' %}",
+    getValue: "name",
+    list: {
+        match: {
+            enabled: true
+        }
+    }
+};
+
+var trainOptions = {
+    url: "{% url 'trainapi' %}",
+    getValue: function(element){
+        var itemName = element.number + " - " + element.name;
+        return itemName;
+    },
+    list: {
+        match: {
+            enabled: true
+        }
+    }
+};
+
+$("#from-input").easyAutocomplete(stationOptions);
+$("#to-input").easyAutocomplete(stationOptions);
+$("#station-input").easyAutocomplete(stationOptions);
+$("#train-input").easyAutocomplete(trainOptions);
+
+$(".easy-autocomplete-container").each(function(i,ele){
+    var inputId = "#" + ele.id.split("-").slice(2).join("-");
+    $(this).width($(inputId).width());
+})
+
+//$(".tap-target").tapTarget("open");
+
+
+$(document).ready(function() {
+    $('.parallax').parallax();
+});
+</script>
+{% endblock js %}

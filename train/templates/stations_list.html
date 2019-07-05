@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %} Stations - C3ennai Loco {% endblock title %} {% block body %}
+<div class="container list-container">
+    <div class="row">
+        {% for station in stations %}
+        <div class="col s12 m6 station scale-transition scale-out">
+          <div class="card blue darken-2 z-depth-2">
+            <div class="card-content white-text center">
+              <span class="card-title">{{ station.name }} ({{ station.code }})</span>
+              <p>Location: {{ station.locality }}, Chennai - {{ station.pincode }}</p>
+              <p>Trains passing through: {{ station.trains.count }}</p>
+            </div>
+            <div class="card-action center">
+              <a href="{% url 'station' station.slug %}" class="view-station">View station info</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+</div> {% endblock body %}
+{% block js %}
+<script>
+$(".station").each(function(i, ele){
+    //base time for the start of the animation
+    var base = 70;
+    setTimeout(function(){
+        $(ele).addClass("scale-in");
+    }, base*i);
+})
+</script>
+{% endblock js %}

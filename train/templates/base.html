@@ -1,0 +1,96 @@
+<!DOCTYPE html> {% load staticfiles %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}ChennaiLoco{% endblock title %}</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+     {% block head %} {% endblock head %}
+</head>
+
+<body>
+    <header>
+    <nav>
+    <div class="nav-wrapper nav-container">
+      <a href="{% url 'home' %}" class="brand-logo">ChennaiLoco</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% if user.is_authenticated %}
+        <li>Hi {{ user.username }}.</li>
+        {% endif %}
+        <li><a href="{% url 'trains' %}">Trains</a></li>
+        <li><a href="{% url 'stations' %}">Stations</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="logout" href="{% url 'auth' %}">Logout</a></li>
+        {% else %}
+        <li><a class="login" href="{% url 'auth' %}">Login</a></li>
+        {% endif %}
+      </ul>
+      <a class='dropdown-button hide-on-med-and-up right' href='#' id="dropdownbutton" data-activates='dropdown1'><i class="material-icons">keyboard_arrow_down</i></a>
+      <ul id='dropdown1' class='dropdown-content'>
+        {% if user.is_authenticated %}
+        <li>Hi {{ user.username }}.</li>
+        <li><a class="logout" href="{% url 'auth' %}">Logout</a></li>
+        {% else %}
+        <li><a class="login" href="{% url 'auth' %}">Login</a></li>
+        {% endif %}
+        <li class="divider"></li>
+        <li><a href="{% url 'trains' %}">Trains</a></li>
+        <li><a href="{% url 'stations' %}">Stations</a></li>
+      </ul>
+    </div>
+  </nav>
+  </header>
+    {% block body %} {% endblock body %}
+    <footer class="page-footer footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">© ChennaiLoco 2017</h5>
+                <p class="grey-text text-lighten-4">Made with ♥ in VIT.</p>
+                <p class="grey-text text-lighten-4">View source on <a href="https://github.com/digi0ps/ChennaiLoco" target="blank">Github</a></p>
+              </div>
+              <div class="col l4 offset-l2 hide-on-small-only">
+                <h5 class="white-text">Group Members</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="https://github.com/digi0ps" target="blank">Sriram R</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Sai Prakash</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Jagadeesh T</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/animatescroll/animatescroll.js' %}"></script>
+    <script>
+    $(".scroll-links").on("click", function(e){
+      e.preventDefault();
+      var element = "#" + this.href.split("#")[1];
+      $(element).animatescroll({scrollSpeed:2000,easing:'easeOutBounce'});
+    });
+
+    $(".dropdown-button").on("click", function(e){
+      e.stopPropagation();
+      var dropdown = $("#dropdown1");
+      if (dropdown.css("display")=="none"){
+        $("main").css("filter", "blur(5px)");
+      }
+    });
+
+    $("body").on("click",function(){
+      if ($("main").css("filter") == "blur(5px)" && $("#dropdown1").css("display") == "block"){
+        $("main").css("filter", "blur(0px)");
+      }
+    });
+    </script>
+    {% block js %} {% endblock js %}
+</body>
+
+</html>
